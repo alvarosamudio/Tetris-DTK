@@ -1,13 +1,12 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <QWidget>
+#include <DWidget>
 
 const int BLOCK_SIZE=25;
 const int MARGIN=5;
 const int AREA_ROW=20;
 const int AREA_COL=12;
-
 
 enum Direction
 {
@@ -18,7 +17,6 @@ enum Direction
     SPACE
 };
 
-
 struct Border
 {
     int ubound;
@@ -27,12 +25,10 @@ struct Border
     int rbound;
 };
 
-
 struct block_point
 {
     int pos_x;
     int pos_y;
-
 };
 
 namespace Ui {

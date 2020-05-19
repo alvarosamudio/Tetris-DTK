@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QPainter>
 #include <QKeyEvent>
+#include <QAction>
+#include <DWidget>
 #include "widget.h"
 #include "ui_widget.h"
 
@@ -63,6 +65,7 @@ int item7[4][4]=
     {0,0,1,0},
     {0,0,1,0}
 };
+
 
 inline void block_cpy(int dblock[4][4],int sblock[4][4])
 {
@@ -246,7 +249,6 @@ void Widget::StartGame()
 {
     game_timer=startTimer(speed_ms);
     paint_timer=startTimer(refresh_ms);
-
     int block_id=rand()%7;
     CreateBlock(next_block,block_id);
     ResetBlock();
@@ -316,13 +318,10 @@ void Widget::BlockMove(Direction dir)
     case UP:
         if(IsCollide(block_pos.pos_x,block_pos.pos_y,UP))
             break;
-
         BlockRotate(cur_block);
-
         for(int i=0;i<4;i++)
             for(int j=0;j<4;j++)
                 game_area[block_pos.pos_y+i][block_pos.pos_x+j]=cur_block[i][j];
-
         GetBorder(cur_block,cur_border);
         break;
 
@@ -359,7 +358,7 @@ void Widget::BlockMove(Direction dir)
                 if(block_pos.pos_x+j>=0&&game_area[block_pos.pos_y+i][block_pos.pos_x+j]!=2)
                     game_area[block_pos.pos_y+i][block_pos.pos_x+j]=cur_block[i][j];
         break;
-
+        
     case RIGHT:
         if(block_pos.pos_x+cur_border.rbound==AREA_COL-1||IsCollide(block_pos.pos_x,block_pos.pos_y,RIGHT))
             break;

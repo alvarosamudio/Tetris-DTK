@@ -14,11 +14,12 @@ int main(int argc, char *argv[])
      a.setApplicationAcknowledgementPage("https://deepinenespañol.org");
      a.setApplicationDescription("tetris in dtk");
      //a.setProductIcon(QIcon(":/images/icon.svg"));
-     //a.setProductName("Tetris");
-     a.setApplicationName("Tetris");
+     //a.setProductName("TETRIS");
+     a.setApplicationName("TETRIS");
 
 
     MainWindow w;
+    //Widget w;
     w.setMinimumSize(100,560);
     w.setWindowFlags(Qt::WindowCloseButtonHint);
     w.show();
