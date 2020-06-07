@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Tetris/css/Oswald-Bold.otf</file>
+        <file>Tetris/css/Oswald-Light.ttf</file>
+        <file>Tetris/css/tetris.css</file>
+        <file>Tetris/img/move-down.png</file>
+        <file>Tetris/img/move-left.png</file>
+        <file>Tetris/img/move-right.png</file>
+        <file>Tetris/img/next-not.png</file>
+        <file>Tetris/img/next.png</file>
+        <file>Tetris/img/pause.png</file>
+        <file>Tetris/img/play.png</file>
+        <file>Tetris/img/rotate.png</file>
+        <file>Tetris/img/sound-off.png</file>
+        <file>Tetris/img/sound-on.png</file>
+        <file>Tetris/js/jquery-buzz.js</file>
+        <file>Tetris/js/jquery-mobile.js</file>
+        <file>Tetris/js/jquery.js</file>
+        <file>Tetris/js/tetris-lines.js</file>
+        <file>Tetris/js/tetris-pieces.js</file>
+        <file>Tetris/js/tetris-score.js</file>
+        <file>Tetris/js/tetris-sound.js</file>
+        <file>Tetris/js/tetris-tools.js</file>
+        <file>Tetris/js/tetris-vars.js</file>
+        <file>Tetris/sound/drop.mp3</file>
+        <file>Tetris/sound/gameover.mp3</file>
+        <file>Tetris/sound/line.mp3</file>
+        <file>Tetris/sound/move.mp3</file>
+        <file>Tetris/sound/rotate.mp3</file>
+        <file>Tetris/sound/tetris.mp3</file>
+        <file>Tetris/sound/theme.mp3</file>
+        <file>Tetris/index.html</file>
+    </qresource>
+</RCC>
