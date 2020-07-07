@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT += core widgets gui webengine webenginewidgets svg
+QT += core widgets gui svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,10 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += src/main.cpp\
         src/mainwindow.cpp \
-    src/widget.cpp
+    src/widget.cpp \
+    src/tetrisgame.cpp \
+    src/gameboard.cpp
 
 HEADERS  += src/mainwindow.h \
-    src/widget.h
+    src/widget.h \
+    src/tetrisgame.h \
+    src/gameboard.h
 
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget
@@ -31,3 +35,4 @@ FORMS += \
 
 RESOURCES += \
     src/resources.qrc
+
