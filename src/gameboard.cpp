@@ -1,5 +1,6 @@
 #include "gameboard.h"
 #include <QKeyEvent>
+#include <QLinearGradient>
 #include <QPainter>
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent), blockSize(30) {
@@ -13,6 +14,8 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent), blockSize(30) {
 void GameBoard::startGame() {
   game.reset();
   timer->start(500);
+  emit scoreChanged(game.getScore());
+  emit nextPieceChanged(game.getNextPiece());
   update();
 }
 
@@ -29,15 +32,39 @@ void GameBoard::resumeGame() {
 }
 
 void GameBoard::gameStep() {
+  int oldScore = game.getScore();
+  TetrominoType oldNextType = game.getNextPiece().type;
+
   if (!game.step()) {
     timer->stop();
   }
+
+  if (game.getScore() != oldScore) {
+    emit scoreChanged(game.getScore());
+  }
+  if (game.getNextPiece().type != oldNextType) {
+    emit nextPieceChanged(game.getNextPiece());
+  }
+
   update();
 }
 
 void GameBoard::paintEvent(QPaintEvent *) {
   QPainter painter(this);
-  painter.fillRect(rect(), Qt::black);
+  painter.setRenderHint(QPainter::Antialiasing);
+
+  // Background - Concept Dark theme
+  painter.fillRect(rect(), QColor(25, 25, 25));
+
+  // Watermark "deepin"
+  painter.setOpacity(0.05);
+  painter.setPen(Qt::white);
+  QFont font = painter.font();
+  font.setPointSize(45);
+  font.setBold(true);
+  painter.setFont(font);
+  painter.drawText(rect(), Qt::AlignCenter, "deepin");
+  painter.setOpacity(1.0);
 
   const auto &grid = game.getGrid();
   for (int y = 2; y < TetrisGame::Height; ++y) {
@@ -58,9 +85,11 @@ void GameBoard::paintEvent(QPaintEvent *) {
   }
 
   if (game.isGameOver()) {
+    painter.fillRect(rect(), QColor(0, 0, 0, 180));
     painter.setPen(Qt::white);
     painter.drawText(rect(), Qt::AlignCenter, "GAME OVER");
   } else if (game.isPaused()) {
+    painter.fillRect(rect(), QColor(0, 0, 0, 120));
     painter.setPen(Qt::white);
     painter.drawText(rect(), Qt::AlignCenter, "PAUSED");
   }
@@ -68,28 +97,45 @@ void GameBoard::paintEvent(QPaintEvent *) {
 
 void GameBoard::drawBlock(QPainter &painter, int x, int y, TetrominoType type) {
   QColor color = getColorForType(type);
-  painter.fillRect(x * blockSize, y * blockSize, blockSize - 1, blockSize - 1,
-                   color);
-  painter.setPen(color.lighter());
-  painter.drawRect(x * blockSize, y * blockSize, blockSize - 1, blockSize - 1);
+  QRectF blockRect(x * blockSize + 3, y * blockSize + 3, blockSize - 6,
+                   blockSize - 6);
+
+  QLinearGradient gradient(blockRect.topLeft(), blockRect.bottomLeft());
+  gradient.setColorAt(0, color.lighter(140));
+  gradient.setColorAt(1, color.darker(110));
+
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(gradient);
+
+  // Pill shape
+  painter.drawRoundedRect(blockRect, blockRect.width() / 2.0,
+                          blockRect.height() / 2.0);
+
+  // Concept Highlight
+  painter.setBrush(QColor(255, 255, 255, 130));
+  QRectF highlightRect(blockRect.left() + blockRect.width() * 0.25,
+                       blockRect.top() + blockRect.height() * 0.15,
+                       blockRect.width() * 0.5, blockRect.height() * 0.25);
+  painter.drawRoundedRect(highlightRect, highlightRect.height() / 2.0,
+                          highlightRect.height() / 2.0);
 }
 
 QColor GameBoard::getColorForType(TetrominoType type) {
   switch (type) {
   case TetrominoType::I:
-    return Qt::cyan;
+    return QColor(255, 80, 80);
   case TetrominoType::J:
-    return Qt::blue;
+    return QColor(80, 150, 255);
   case TetrominoType::L:
-    return QColor(255, 165, 0); // Orange
+    return QColor(255, 150, 50);
   case TetrominoType::O:
-    return Qt::yellow;
+    return QColor(255, 220, 50);
   case TetrominoType::S:
-    return Qt::green;
+    return QColor(100, 220, 80);
   case TetrominoType::T:
-    return Qt::magenta;
+    return QColor(180, 100, 255);
   case TetrominoType::Z:
-    return Qt::red;
+    return QColor(255, 100, 100);
   default:
     return Qt::black;
   }

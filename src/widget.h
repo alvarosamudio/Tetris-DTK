@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include "gameboard.h"
+#include "nextpiecewidget.h"
 #include <QWidget>
 
 namespace Ui {
@@ -17,10 +18,13 @@ public:
 
 private slots:
   void onStartClicked();
+  void updateScore(int score);
+  void updateNextPiece(const Tetromino &piece);
 
 private:
   Ui::Widget *ui;
   GameBoard *m_gameBoard;
+  NextPieceWidget *m_nextPieceWidget;
 };
 
 #endif // WIDGET_H
