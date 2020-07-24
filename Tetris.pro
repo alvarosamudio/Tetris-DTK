@@ -23,7 +23,8 @@ SOURCES += src/main.cpp\
 HEADERS  += src/mainwindow.h \
     src/widget.h \
     src/tetrisgame.h \
-    src/gameboard.h
+    src/gameboard.h \
+    src/nextpiecewidget.h
 
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget
