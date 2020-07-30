@@ -55,15 +55,23 @@ void TetrisGame::reset() {
     grid[i].fill(TetrominoType::None, Width);
   score = 0;
   gameState = GameState::Running;
+
+  static const TetrominoType types[] = {
+      TetrominoType::I, TetrominoType::J, TetrominoType::L, TetrominoType::O,
+      TetrominoType::S, TetrominoType::T, TetrominoType::Z};
+  nextPiece = Tetromino::create(types[QRandomGenerator::global()->bounded(7)]);
+
   spawnPiece();
 }
 
 void TetrisGame::spawnPiece() {
+  currentPiece = nextPiece;
+
   static const TetrominoType types[] = {
       TetrominoType::I, TetrominoType::J, TetrominoType::L, TetrominoType::O,
       TetrominoType::S, TetrominoType::T, TetrominoType::Z};
-  currentPiece =
-      Tetromino::create(types[QRandomGenerator::global()->bounded(7)]);
+  nextPiece = Tetromino::create(types[QRandomGenerator::global()->bounded(7)]);
+
   if (!isValidPosition(currentPiece, currentPiece.position)) {
     gameState = GameState::GameOver;
   }
