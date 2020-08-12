@@ -69,3 +69,7 @@ Para compilar este proyecto en Deepin o cualquier sistema con soporte DTK, neces
 ---
 
 _Hecho con ❤️ para la comunidad de Deepin._
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia **GNU General Public License v3.0**. Consulta el archivo [LICENSE](file:///Users/ghost/Documents/Proyectos/GitHub/Tetris-DTK/LICENSE) para más detalles.
