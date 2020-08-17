@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
      a.setOrganizationName("deepin en español");
      //a.setApplicationVersion(DApplication::buildVersion("0.1a"));
      //a.setApplicationAcknowledgementPage("https://");
-     a.setProductIcon(QIcon(":/images/pixlr_logo.svg"));
-     a.setWindowIcon(QIcon(":/images/pixlr_logo.svg"));
+      a.setProductIcon(QIcon::fromTheme("applications-games"));
+      a.setWindowIcon(QIcon::fromTheme("applications-games"));
      a.setProductName("Tetris");
      a.setApplicationName("Tetris");
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
      //Title
       dialog.setWindowTitle("Tetris");
       dialog.setProductName("<span>Tetris</span>");
-      dialog.setProductIcon(QIcon(":/images/logo.svg"));
+      dialog.setProductIcon(QIcon::fromTheme("applications-games"));
       //dialog.setCompanyLogo(QPixmap(":/images/logo.svg"));
       dialog.setDescription(
           "<span style=' font-size:8pt; font-weight:600;'>Deepin en Español </span>"
