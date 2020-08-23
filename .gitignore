@@ -17,8 +17,10 @@
 Makefile*
 moc_*.cpp
 mocs_compilation.cpp
+moc_predefs.h
 ui_*.h
 qrc_*.cpp
+.qmake.stash
 *.pyc
 *.user
 *.user.*
