@@ -46,6 +46,15 @@ void Tetromino::rotateClockwise() {
   }
 }
 
+static const TetrominoType kAllTypes[] = {
+    TetrominoType::I, TetrominoType::J, TetrominoType::L, TetrominoType::O,
+    TetrominoType::S, TetrominoType::T, TetrominoType::Z};
+static constexpr int kNumTypes = sizeof(kAllTypes) / sizeof(kAllTypes[0]);
+
+static Tetromino randomPiece() {
+  return Tetromino::create(kAllTypes[QRandomGenerator::global()->bounded(kNumTypes)]);
+}
+
 TetrisGame::TetrisGame() { reset(); }
 
 void TetrisGame::reset() {
@@ -56,21 +65,13 @@ void TetrisGame::reset() {
   score = 0;
   gameState = GameState::Running;
 
-  static const TetrominoType types[] = {
-      TetrominoType::I, TetrominoType::J, TetrominoType::L, TetrominoType::O,
-      TetrominoType::S, TetrominoType::T, TetrominoType::Z};
-  nextPiece = Tetromino::create(types[QRandomGenerator::global()->bounded(7)]);
-
+  nextPiece = randomPiece();
   spawnPiece();
 }
 
 void TetrisGame::spawnPiece() {
   currentPiece = nextPiece;
-
-  static const TetrominoType types[] = {
-      TetrominoType::I, TetrominoType::J, TetrominoType::L, TetrominoType::O,
-      TetrominoType::S, TetrominoType::T, TetrominoType::Z};
-  nextPiece = Tetromino::create(types[QRandomGenerator::global()->bounded(7)]);
+  nextPiece = randomPiece();
 
   if (!isValidPosition(currentPiece, currentPiece.position)) {
     gameState = GameState::GameOver;

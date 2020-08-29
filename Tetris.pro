@@ -18,7 +18,8 @@ SOURCES += src/main.cpp\
         src/mainwindow.cpp \
     src/widget.cpp \
     src/tetrisgame.cpp \
-    src/gameboard.cpp
+    src/gameboard.cpp \
+    src/nextpiecewidget.cpp
 
 HEADERS  += src/mainwindow.h \
     src/widget.h \

@@ -1,52 +1,36 @@
 #include "mainwindow.h"
-#include <DApplication>
-#include <DWidgetUtil>  //Dtk::Widget::moveToCenter(&w)
 #include <DAboutDialog>
-#include <DMainWindow>
-
+#include <DApplication>
+#include <DWidgetUtil>
 
 DWIDGET_USE_NAMESPACE
+
 int main(int argc, char *argv[])
 {
-    DApplication::loadDXcbPlugin();  //让bar处在标题栏中
     DApplication a(argc, argv);
+    a.loadTranslator();
+    a.setOrganizationName("deepin en español");
+    a.setProductIcon(QIcon::fromTheme("applications-games"));
+    a.setWindowIcon(QIcon::fromTheme("applications-games"));
+    a.setProductName("Tetris");
+    a.setApplicationName("Tetris");
+
     DAboutDialog dialog;
-
-     //a.setAttribute(Qt::AA_UseHighDpiPixmaps);
-     a.loadTranslator();
-     a.setOrganizationName("deepin en español");
-     //a.setApplicationVersion(DApplication::buildVersion("0.1a"));
-     //a.setApplicationAcknowledgementPage("https://");
-      a.setProductIcon(QIcon::fromTheme("applications-games"));
-      a.setWindowIcon(QIcon::fromTheme("applications-games"));
-     a.setProductName("Tetris");
-     a.setApplicationName("Tetris");
-
-     //Dialog//
-     a.setAboutDialog(&dialog);
-     //Title
-      dialog.setWindowTitle("Tetris");
-      dialog.setProductName("<span>Tetris</span>");
-      dialog.setProductIcon(QIcon::fromTheme("applications-games"));
-      //dialog.setCompanyLogo(QPixmap(":/images/logo.svg"));
-      dialog.setDescription(
-          "<span style=' font-size:8pt; font-weight:600;'>Deepin en Español </span>"
-          "<a href='https://deepinenespañol.org'>https://deepinenespañol.org</a><br/>"
-          "<span style=' font-size:8pt; font-weight:600;'>Deepin Latin Code - developers</span>");
-      dialog.setVersion(DApplication::buildVersion("Version 0.1"));
-      dialog.setWebsiteName("deepinenespañol.org");
-      dialog.setWebsiteLink("https://deepinenespañol.org");
+    a.setAboutDialog(&dialog);
+    dialog.setWindowTitle("Tetris");
+    dialog.setProductName("<span>Tetris</span>");
+    dialog.setProductIcon(QIcon::fromTheme("applications-games"));
+    dialog.setDescription(
+        "<span style=' font-size:8pt; font-weight:600;'>Deepin en Español </span>"
+        "<a href='https://deepinenespanol.org'>https://deepinenespanol.org</a><br/>"
+        "<span style=' font-size:8pt; font-weight:600;'>Deepin Latin Code - developers</span>");
+    dialog.setVersion(DApplication::buildVersion("Version 0.1"));
+    dialog.setWebsiteName("deepinenespanol.org");
+    dialog.setWebsiteLink("https://deepinenespanol.org");
 
     MainWindow w;
-    //Widget w;
-//    w.setTranslucentBackground(100);
-    w.setWindowFlags(Qt::WindowCloseButtonHint);
     w.show();
-
-    //Centrando ventana
-
     Dtk::Widget::moveToCenter(&w);
-
 
     return a.exec();
 }

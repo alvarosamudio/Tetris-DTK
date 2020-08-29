@@ -3,7 +3,7 @@
 #include <QLinearGradient>
 #include <QPainter>
 
-GameBoard::GameBoard(QWidget *parent) : QWidget(parent), blockSize(30) {
+GameBoard::GameBoard(QWidget *parent) : QWidget(parent), blockSize(35) {
   setFocusPolicy(Qt::StrongFocus);
   timer = new QTimer(this);
   connect(timer, &QTimer::timeout, this, &GameBoard::gameStep);
@@ -66,6 +66,19 @@ void GameBoard::paintEvent(QPaintEvent *) {
   painter.drawText(rect(), Qt::AlignCenter, "deepin");
   painter.setOpacity(1.0);
 
+  int rows = TetrisGame::Height - 2;
+
+  // Grid lines
+  painter.setPen(QPen(QColor(255, 255, 255, 15), 1));
+  for (int x = 0; x <= TetrisGame::Width; ++x) {
+    int lx = x * blockSize;
+    painter.drawLine(lx, 0, lx, rows * blockSize);
+  }
+  for (int y = 0; y <= rows; ++y) {
+    int ly = y * blockSize;
+    painter.drawLine(0, ly, TetrisGame::Width * blockSize, ly);
+  }
+
   const auto &grid = game.getGrid();
   for (int y = 2; y < TetrisGame::Height; ++y) {
     for (int x = 0; x < TetrisGame::Width; ++x) {
@@ -87,11 +100,23 @@ void GameBoard::paintEvent(QPaintEvent *) {
   if (game.isGameOver()) {
     painter.fillRect(rect(), QColor(0, 0, 0, 180));
     painter.setPen(Qt::white);
+    QFont ofont = painter.font();
+    QFont f = ofont;
+    f.setPointSize(24);
+    f.setBold(true);
+    painter.setFont(f);
     painter.drawText(rect(), Qt::AlignCenter, "GAME OVER");
+    painter.setFont(ofont);
   } else if (game.isPaused()) {
     painter.fillRect(rect(), QColor(0, 0, 0, 120));
     painter.setPen(Qt::white);
+    QFont ofont = painter.font();
+    QFont f = ofont;
+    f.setPointSize(24);
+    f.setBold(true);
+    painter.setFont(f);
     painter.drawText(rect(), Qt::AlignCenter, "PAUSED");
+    painter.setFont(ofont);
   }
 }
 
