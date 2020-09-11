@@ -37,6 +37,7 @@ void GameBoard::gameStep() {
 
   if (!game.step()) {
     timer->stop();
+    emit gameOver(game.getScore());
   }
 
   if (game.getScore() != oldScore) {
@@ -167,6 +168,9 @@ QColor GameBoard::getColorForType(TetrominoType type) {
 }
 
 void GameBoard::keyPressEvent(QKeyEvent *event) {
+  int oldScore = game.getScore();
+  TetrominoType oldNext = game.getNextPiece().type;
+
   switch (event->key()) {
   case Qt::Key_Left:
     game.moveLeft();
@@ -193,5 +197,13 @@ void GameBoard::keyPressEvent(QKeyEvent *event) {
     QWidget::keyPressEvent(event);
     return;
   }
+
+  if (game.getScore() != oldScore)
+    emit scoreChanged(game.getScore());
+  if (game.getNextPiece().type != oldNext)
+    emit nextPieceChanged(game.getNextPiece());
+  if (game.isGameOver())
+    emit gameOver(game.getScore());
+
   update();
 }

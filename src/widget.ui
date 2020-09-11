@@ -80,15 +80,37 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="scoreLabel">
-         <property name="text">
-          <string>Score: 0</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
+         <widget class="QLabel" name="scoreLabel">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>SCORE</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="highScoreLabel">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>HI-SCORE</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
@@ -102,27 +124,25 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <widget class="QPushButton" name="startBtn">
-         <property name="text">
-          <string>Start</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+        <item>
+         <widget class="QPushButton" name="startBtn">
+          <property name="text">
+           <string>Start</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="muteBtn">
+          <property name="text">
+           <string>Mute</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
      </item>
     </layout>
    </item>
-   <item>
-    <widget class="QLabel" name="bottomLogo">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#3291e6;&quot;&gt;deepin&lt;/span&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#ffffff;&quot;&gt; TETRIS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
+
   </layout>
  </widget>
 

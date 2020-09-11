@@ -3,7 +3,7 @@
 #include <QString>
 #include <QVBoxLayout>
 
-Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
+Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(false), m_highScore(0) {
   ui->setupUi(this);
 
   // Set dark theme style for the whole window
@@ -30,15 +30,44 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
   connect(m_gameBoard, &GameBoard::scoreChanged, this, &Widget::updateScore);
   connect(m_gameBoard, &GameBoard::nextPieceChanged, this,
           &Widget::updateNextPiece);
+  connect(m_gameBoard, &GameBoard::gameOver, this, &Widget::onGameOver);
   connect(ui->startBtn, &QPushButton::clicked, this, &Widget::onStartClicked);
+  connect(ui->muteBtn, &QPushButton::clicked, this, &Widget::onMuteClicked);
 
   // Custom styling for labels according to concept
-  ui->scoreLabel->setText("SCORE\n000000000");
+  ui->scoreLabel->setText("SCORE\n000000");
   ui->scoreLabel->setStyleSheet(
-      "font-family: 'Monospace'; font-weight: bold; letter-spacing: 2px;");
+      "font-size: 16pt; font-family: 'Monospace'; font-weight: bold; letter-spacing: 2px; color: #ffffff;");
+
+  ui->highScoreLabel->setStyleSheet(
+      "font-size: 11pt; font-family: 'Monospace'; font-weight: bold; color: #ffcc00;");
+
+  loadHighScore();
 }
 
 Widget::~Widget() { delete ui; }
+
+void Widget::loadHighScore() {
+  QSettings settings("deepin-es", "Tetris");
+  m_highScore = settings.value("highScore", 0).toInt();
+  QString hsStr = QString("%1").arg(m_highScore, 6, 10, QChar('0'));
+  ui->highScoreLabel->setText(QString("HI-SCORE\n%1").arg(hsStr));
+}
+
+void Widget::saveHighScore(int score) {
+  QSettings settings("deepin-es", "Tetris");
+  settings.setValue("highScore", score);
+  settings.sync();
+}
+
+void Widget::onGameOver(int score) {
+  if (score > m_highScore) {
+    m_highScore = score;
+    saveHighScore(score);
+    QString hsStr = QString("%1").arg(m_highScore, 6, 10, QChar('0'));
+    ui->highScoreLabel->setText(QString("HI-SCORE\n%1").arg(hsStr));
+  }
+}
 
 void Widget::onStartClicked() {
   m_gameBoard->startGame();
@@ -47,11 +76,16 @@ void Widget::onStartClicked() {
 }
 
 void Widget::updateScore(int score) {
-  // Pad with zeros like in concept 000012903
-  QString scoreStr = QString("%1").arg(score, 9, 10, QChar('0'));
+  QString scoreStr = QString("%1").arg(score, 6, 10, QChar('0'));
   ui->scoreLabel->setText(QString("SCORE\n%1").arg(scoreStr));
 }
 
 void Widget::updateNextPiece(const Tetromino &piece) {
   m_nextPieceWidget->setNextPiece(piece);
+}
+
+void Widget::onMuteClicked() {
+  m_muted = !m_muted;
+  ui->muteBtn->setText(m_muted ? "Unmute" : "Mute");
+  emit musicToggled(m_muted);
 }

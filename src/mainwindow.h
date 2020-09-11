@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <DMainWindow>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include "widget.h"
 
 DWIDGET_USE_NAMESPACE
@@ -16,6 +18,8 @@ public:
 
 private:
     Widget *w;
+    QMediaPlayer *m_music;
+    QMediaPlaylist *m_playlist;
 };
 
 #endif // MAINWINDOW_H

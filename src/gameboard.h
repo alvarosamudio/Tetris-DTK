@@ -20,6 +20,7 @@ public:
 signals:
   void scoreChanged(int score);
   void nextPieceChanged(const Tetromino &piece);
+  void gameOver(int score);
 
 protected:
   void paintEvent(QPaintEvent *event) override;

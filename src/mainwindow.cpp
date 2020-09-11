@@ -1,25 +1,35 @@
 #include "mainwindow.h"
 #include <DMainWindow>
-#include <QtWidgets/QVBoxLayout>
-
+#include <QUrl>
+#include <QVBoxLayout>
 
 DWIDGET_USE_NAMESPACE
 
-
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
-
-
 {
     w = new Widget;
 
     resize(w->size());
+    setFixedSize(w->size());
+    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 
     setCentralWidget(w);
     centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
+
+    m_playlist = new QMediaPlaylist(this);
+    m_playlist->addMedia(QUrl("qrc:/tetris_theme.wav"));
+    m_playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    m_music = new QMediaPlayer(this);
+    m_music->setPlaylist(m_playlist);
+    m_music->play();
+
+    connect(w, &Widget::musicToggled, this, [this](bool muted) {
+        m_music->setMuted(muted);
+    });
 }
 
 MainWindow::~MainWindow()
 {
-
 }
