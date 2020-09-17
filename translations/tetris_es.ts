@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
+<context>
+    <name>GameBoard</name>
+    <message>
+        <source>GAME OVER</source>
+        <translation>FIN DEL JUEGO</translation>
+    </message>
+    <message>
+        <source>PAUSED</source>
+        <translation>PAUSADO</translation>
+    </message>
+</context>
+<context>
+    <name>Widget</name>
+    <message>
+        <source>NEXT</source>
+        <translation>SIGUIENTE</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Iniciar</translation>
+    </message>
+    <message>
+        <source>Mute</source>
+        <translation>Silenciar</translation>
+    </message>
+    <message>
+        <source>SCORE</source>
+        <translation>PUNTOS</translation>
+    </message>
+    <message>
+        <source>HI-SCORE</source>
+        <translation>MÁXIMO</translation>
+    </message>
+    <message>
+        <source>RESTART</source>
+        <translation>REINICIAR</translation>
+    </message>
+    <message>
+        <source>Unmute</source>
+        <translation>Activar sonido</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Tetris</source>
+        <translation>Tetris</translation>
+    </message>
+</context>
+</TS>

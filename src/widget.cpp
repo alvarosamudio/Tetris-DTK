@@ -35,7 +35,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
   connect(ui->muteBtn, &QPushButton::clicked, this, &Widget::onMuteClicked);
 
   // Custom styling for labels according to concept
-  ui->scoreLabel->setText("SCORE\n000000");
+  ui->scoreLabel->setText(tr("SCORE") + "\n000000");
   ui->scoreLabel->setStyleSheet(
       "font-size: 16pt; font-family: 'Monospace'; font-weight: bold; letter-spacing: 2px; color: #ffffff;");
 
@@ -51,7 +51,7 @@ void Widget::loadHighScore() {
   QSettings settings("deepin-es", "Tetris");
   m_highScore = settings.value("highScore", 0).toInt();
   QString hsStr = QString("%1").arg(m_highScore, 6, 10, QChar('0'));
-  ui->highScoreLabel->setText(QString("HI-SCORE\n%1").arg(hsStr));
+  ui->highScoreLabel->setText(tr("HI-SCORE") + "\n" + hsStr);
 }
 
 void Widget::saveHighScore(int score) {
@@ -65,19 +65,19 @@ void Widget::onGameOver(int score) {
     m_highScore = score;
     saveHighScore(score);
     QString hsStr = QString("%1").arg(m_highScore, 6, 10, QChar('0'));
-    ui->highScoreLabel->setText(QString("HI-SCORE\n%1").arg(hsStr));
+    ui->highScoreLabel->setText(tr("HI-SCORE") + "\n" + hsStr);
   }
 }
 
 void Widget::onStartClicked() {
   m_gameBoard->startGame();
   m_gameBoard->setFocus();
-  ui->startBtn->setText("RESTART");
+  ui->startBtn->setText(tr("RESTART"));
 }
 
 void Widget::updateScore(int score) {
   QString scoreStr = QString("%1").arg(score, 6, 10, QChar('0'));
-  ui->scoreLabel->setText(QString("SCORE\n%1").arg(scoreStr));
+  ui->scoreLabel->setText(tr("SCORE") + "\n" + scoreStr);
 }
 
 void Widget::updateNextPiece(const Tetromino &piece) {
@@ -86,6 +86,6 @@ void Widget::updateNextPiece(const Tetromino &piece) {
 
 void Widget::onMuteClicked() {
   m_muted = !m_muted;
-  ui->muteBtn->setText(m_muted ? "Unmute" : "Mute");
+  ui->muteBtn->setText(m_muted ? tr("Unmute") : tr("Mute"));
   emit musicToggled(m_muted);
 }

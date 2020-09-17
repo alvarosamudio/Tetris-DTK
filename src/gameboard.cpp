@@ -106,7 +106,7 @@ void GameBoard::paintEvent(QPaintEvent *) {
     f.setPointSize(24);
     f.setBold(true);
     painter.setFont(f);
-    painter.drawText(rect(), Qt::AlignCenter, "GAME OVER");
+    painter.drawText(rect(), Qt::AlignCenter, tr("GAME OVER"));
     painter.setFont(ofont);
   } else if (game.isPaused()) {
     painter.fillRect(rect(), QColor(0, 0, 0, 120));
@@ -116,7 +116,7 @@ void GameBoard::paintEvent(QPaintEvent *) {
     f.setPointSize(24);
     f.setBold(true);
     painter.setFont(f);
-    painter.drawText(rect(), Qt::AlignCenter, "PAUSED");
+    painter.drawText(rect(), Qt::AlignCenter, tr("PAUSED"));
     painter.setFont(ofont);
   }
 }

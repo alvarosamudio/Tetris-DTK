@@ -2,6 +2,9 @@
 #include <DAboutDialog>
 #include <DApplication>
 #include <DWidgetUtil>
+#include <QApplication>
+#include <QDir>
+#include <QTranslator>
 
 DWIDGET_USE_NAMESPACE
 
@@ -10,9 +13,14 @@ int main(int argc, char *argv[])
     DApplication a(argc, argv);
     a.loadTranslator();
     a.setOrganizationName("deepin en español");
+
+    QTranslator appTranslator;
+    appTranslator.load(QLocale(), QLatin1String("tetris"), QLatin1String("_"),
+                       QApplication::applicationDirPath() + QLatin1String("/translations"));
+    a.installTranslator(&appTranslator);
     a.setProductIcon(QIcon::fromTheme("applications-games"));
     a.setWindowIcon(QIcon::fromTheme("applications-games"));
-    a.setProductName("Tetris");
+    a.setProductName(QApplication::translate("main", "Tetris"));
     a.setApplicationName("Tetris");
 
     DAboutDialog dialog;

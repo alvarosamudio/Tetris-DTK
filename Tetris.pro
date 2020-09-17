@@ -38,3 +38,9 @@ FORMS += \
 RESOURCES += \
     src/resources.qrc
 
+TRANSLATIONS = \
+    translations/tetris_es.ts \
+    translations/tetris_fr.ts \
+    translations/tetris_de.ts \
+    translations/tetris_pt.ts
+
