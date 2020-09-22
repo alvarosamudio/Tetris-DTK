@@ -25,6 +25,7 @@ qrc_*.cpp
 *.user
 *.user.*
 Tetris
+*.pro.user*
 
 # Debug/Release directories
 debug/
