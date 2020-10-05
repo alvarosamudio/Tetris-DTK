@@ -30,7 +30,8 @@ HEADERS  += src/mainwindow.h \
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget
 
-CONFIG += c++11
+CONFIG += c++11 lrelease embed_translations
+QM_FILES_RESOURCE_PREFIX = /translations
 
 FORMS += \
     src/widget.ui

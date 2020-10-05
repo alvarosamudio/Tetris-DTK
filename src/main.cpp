@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     QTranslator appTranslator;
     appTranslator.load(QLocale(), QLatin1String("tetris"), QLatin1String("_"),
-                       QApplication::applicationDirPath() + QLatin1String("/translations"));
+                       QLatin1String(":/translations/"));
     a.installTranslator(&appTranslator);
     a.setProductIcon(QIcon::fromTheme("applications-games"));
     a.setWindowIcon(QIcon::fromTheme("applications-games"));

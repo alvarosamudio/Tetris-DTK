@@ -26,6 +26,9 @@ qrc_*.cpp
 *.user.*
 Tetris
 *.pro.user*
+translations/*.qm
+.qm/
+qmake_qmake_qm_files.qrc
 
 # Debug/Release directories
 debug/
