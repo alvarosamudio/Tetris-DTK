@@ -43,5 +43,9 @@ TRANSLATIONS = \
     translations/tetris_es.ts \
     translations/tetris_fr.ts \
     translations/tetris_de.ts \
-    translations/tetris_pt.ts
+    translations/tetris_pt.ts \
+    translations/tetris_zh.ts \
+    translations/tetris_ru.ts \
+    translations/tetris_uk.ts \
+    translations/tetris_it.ts
 

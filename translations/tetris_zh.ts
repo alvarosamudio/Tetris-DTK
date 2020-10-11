@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh">
+<context>
+    <name>GameBoard</name>
+    <message>
+        <source>GAME OVER</source>
+        <translation>游戏结束</translation>
+    </message>
+    <message>
+        <source>PAUSED</source>
+        <translation>已暂停</translation>
+    </message>
+</context>
+<context>
+    <name>Widget</name>
+    <message>
+        <source>NEXT</source>
+        <translation>下一个</translation>
+    </message>
+    <message>
+        <source>SCORE</source>
+        <translation>分数</translation>
+    </message>
+    <message>
+        <source>HI-SCORE</source>
+        <translation>最高分</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>开始</translation>
+    </message>
+    <message>
+        <source>Mute</source>
+        <translation>静音</translation>
+    </message>
+    <message>
+        <source>RESTART</source>
+        <translation>重新开始</translation>
+    </message>
+    <message>
+        <source>Unmute</source>
+        <translation>取消静音</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Tetris</source>
+        <translation>俄罗斯方块</translation>
+    </message>
+</context>
+</TS>
