@@ -49,3 +49,17 @@ TRANSLATIONS = \
     translations/tetris_uk.ts \
     translations/tetris_it.ts
 
+isEmpty(PREFIX) {
+    PREFIX = /usr/local
+}
+target.path = $$PREFIX/bin
+INSTALLS += target
+
+desktopfile.path = $$PREFIX/share/applications
+desktopfile.files = src/tetris-deepin.desktop
+INSTALLS += desktopfile
+
+icon.path = $$PREFIX/share/icons/hicolor/scalable/apps
+icon.files = src/icons/tetris-deepin.svg
+INSTALLS += icon
+
