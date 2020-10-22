@@ -14,18 +14,18 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 
-SOURCES += src/main.cpp\
-        src/mainwindow.cpp \
-    src/widget.cpp \
-    src/tetrisgame.cpp \
-    src/gameboard.cpp \
-    src/nextpiecewidget.cpp
+SOURCES += main.cpp\
+        mainwindow.cpp \
+    widget.cpp \
+    tetrisgame.cpp \
+    gameboard.cpp \
+    nextpiecewidget.cpp
 
-HEADERS  += src/mainwindow.h \
-    src/widget.h \
-    src/tetrisgame.h \
-    src/gameboard.h \
-    src/nextpiecewidget.h
+HEADERS  += mainwindow.h \
+    widget.h \
+    tetrisgame.h \
+    gameboard.h \
+    nextpiecewidget.h
 
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget
@@ -34,10 +34,10 @@ CONFIG += c++11 lrelease embed_translations
 QM_FILES_RESOURCE_PREFIX = /translations
 
 FORMS += \
-    src/widget.ui
+    widget.ui
 
 RESOURCES += \
-    src/resources.qrc
+    resources.qrc
 
 TRANSLATIONS = \
     translations/tetris_es.ts \
@@ -56,10 +56,10 @@ target.path = $$PREFIX/bin
 INSTALLS += target
 
 desktopfile.path = $$PREFIX/share/applications
-desktopfile.files = src/tetris-deepin.desktop
+desktopfile.files = tetris-deepin.desktop
 INSTALLS += desktopfile
 
 icon.path = $$PREFIX/share/icons/hicolor/scalable/apps
-icon.files = src/icons/tetris-deepin.svg
+icon.files = icons/tetris-deepin.svg
 INSTALLS += icon
 

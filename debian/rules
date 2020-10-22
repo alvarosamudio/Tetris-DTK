@@ -7,12 +7,12 @@ export LD_LIBRARY_PATH = /home/ghost/.local/dtk5/lib:$(LD_LIBRARY_PATH)
 	dh $@
 
 override_dh_auto_configure:
-	/usr/lib/qt5/bin/qmake PREFIX=/usr
+	cd src && /usr/lib/qt5/bin/qmake PREFIX=/usr
 
 override_dh_auto_clean:
-	test ! -f Makefile || /usr/lib/qt5/bin/qmake -after "CONFIG-=lrelease embed_translations" 2>/dev/null || true
+	test ! -f src/Makefile || /usr/lib/qt5/bin/qmake -after "CONFIG-=lrelease embed_translations" 2>/dev/null || true
 	dh_auto_clean
-	rm -rf .qm
+	rm -rf src/.qm
 
 override_dh_install:
 	dh_install
