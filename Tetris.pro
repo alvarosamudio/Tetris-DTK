@@ -14,18 +14,18 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    widget.cpp \
-    tetrisgame.cpp \
-    gameboard.cpp \
-    nextpiecewidget.cpp
+SOURCES += src/main.cpp\
+        src/mainwindow.cpp \
+    src/widget.cpp \
+    src/tetrisgame.cpp \
+    src/gameboard.cpp \
+    src/nextpiecewidget.cpp
 
-HEADERS  += mainwindow.h \
-    widget.h \
-    tetrisgame.h \
-    gameboard.h \
-    nextpiecewidget.h
+HEADERS  += src/mainwindow.h \
+    src/widget.h \
+    src/tetrisgame.h \
+    src/gameboard.h \
+    src/nextpiecewidget.h
 
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget
@@ -34,20 +34,20 @@ CONFIG += c++11 lrelease embed_translations
 QM_FILES_RESOURCE_PREFIX = /translations
 
 FORMS += \
-    widget.ui
+    src/widget.ui
 
 RESOURCES += \
-    resources.qrc
+    src/resources.qrc
 
 TRANSLATIONS = \
-    translations/tetris_es.ts \
-    translations/tetris_fr.ts \
-    translations/tetris_de.ts \
-    translations/tetris_pt.ts \
-    translations/tetris_zh.ts \
-    translations/tetris_ru.ts \
-    translations/tetris_uk.ts \
-    translations/tetris_it.ts
+    src/translations/tetris_es.ts \
+    src/translations/tetris_fr.ts \
+    src/translations/tetris_de.ts \
+    src/translations/tetris_pt.ts \
+    src/translations/tetris_zh.ts \
+    src/translations/tetris_ru.ts \
+    src/translations/tetris_uk.ts \
+    src/translations/tetris_it.ts
 
 isEmpty(PREFIX) {
     PREFIX = /usr/local
@@ -56,10 +56,10 @@ target.path = $$PREFIX/bin
 INSTALLS += target
 
 desktopfile.path = $$PREFIX/share/applications
-desktopfile.files = tetris-deepin.desktop
+desktopfile.files = src/tetris-deepin.desktop
 INSTALLS += desktopfile
 
 icon.path = $$PREFIX/share/icons/hicolor/scalable/apps
-icon.files = icons/tetris-deepin.svg
+icon.files = src/icons/tetris-deepin.svg
 INSTALLS += icon
 
