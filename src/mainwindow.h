@@ -10,16 +10,12 @@ class MainWindow : public DMainWindow
 {
     Q_OBJECT
 
-
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QWidget *BlockMove;
-    QWidget *BlockRotate;
-
 private:
-    QWidget *w;
+    Widget *w;
 };
 
 #endif // MAINWINDOW_H
