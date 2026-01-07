@@ -15,6 +15,12 @@ public:
   void pauseGame();
   void resumeGame();
 
+  const TetrisGame &getGame() const { return game; }
+
+signals:
+  void scoreChanged(int score);
+  void nextPieceChanged(const Tetromino &piece);
+
 protected:
   void paintEvent(QPaintEvent *event) override;
   void keyPressEvent(QKeyEvent *event) override;
