@@ -1,8 +1,8 @@
 #ifndef TETRISGAME_H
 #define TETRISGAME_H
 
-#include <QPoint>
-#include <QVector>
+#include <QtCore/QPoint>
+#include <QtCore/QVector>
 
 enum class TetrominoType { None, I, J, L, O, S, T, Z };
 
@@ -33,6 +33,7 @@ public:
 
   const QVector<QVector<TetrominoType>> &getGrid() const { return grid; }
   const Tetromino &getCurrentPiece() const { return currentPiece; }
+  const Tetromino &getNextPiece() const { return nextPiece; }
   int getScore() const { return score; }
   bool isGameOver() const { return gameState == GameState::GameOver; }
   bool isPaused() const { return gameState == GameState::Paused; }
