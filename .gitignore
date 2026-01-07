@@ -1,0 +1,38 @@
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dll
+*.exp
+*.ilk
+*.pdb
+*.map
+
+# Qt files
+Makefile*
+moc_*.cpp
+mocs_compilation.cpp
+ui_*.h
+qrc_*.cpp
+*.pyc
+*.user
+*.user.*
+Tetris
+
+# Debug/Release directories
+debug/
+release/
+
+# Build directories
+build*/
+
+# Hidden files
+.DS_Store
+.vscode/
+.idea/
+*.swp
