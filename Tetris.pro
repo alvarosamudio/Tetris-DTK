@@ -8,7 +8,7 @@ QT += core widgets gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Tetris
+TARGET = tetris-deepin
 TEMPLATE = app
 
 DEFINES += QT_DEPRECATED_WARNINGS
