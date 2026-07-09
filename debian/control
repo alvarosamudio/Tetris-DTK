@@ -13,8 +13,7 @@ Homepage: https://deepinenespanol.org
 Package: tetris-deepin
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
-         qt5-image-formats-plugins,
-         qtmultimedia5-dev
+         qt5-image-formats-plugins
 Description: Classic Tetris game for Deepin desktop
  A modern Tetris implementation built with Qt and DTK,
  featuring pill-shaped blocks, music, high score tracking,

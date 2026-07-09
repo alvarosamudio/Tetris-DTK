@@ -10,13 +10,5 @@ override_dh_auto_configure:
 	/usr/lib/qt5/bin/qmake PREFIX=/usr
 
 override_dh_auto_clean:
-	test ! -f Makefile || /usr/lib/qt5/bin/qmake -after "CONFIG-=lrelease embed_translations" 2>/dev/null || true
 	dh_auto_clean
 	rm -rf .qm
-
-override_dh_install:
-	dh_install
-	install -d debian/tetris-deepin/usr/share/applications
-	install -m 644 src/tetris-deepin.desktop debian/tetris-deepin/usr/share/applications/
-	install -d debian/tetris-deepin/usr/share/icons/hicolor/scalable/apps
-	install -m 644 src/icons/tetris-deepin.svg debian/tetris-deepin/usr/share/icons/hicolor/scalable/apps/
