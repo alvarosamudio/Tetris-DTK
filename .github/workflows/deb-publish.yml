@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -18,15 +18,34 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            debhelper-compat \
+            build-essential \
+            debhelper \
             qt5-qmake \
             qtbase5-dev \
             qtmultimedia5-dev \
-            libdtkwidget-dev
+            libdtkwidget-dev \
+            libqt5x11extras5-dev \
+            fakeroot
 
-      - name: Build .deb
+      - name: Debug environment
         run: |
-          dpkg-buildpackage -us -uc -b
+          pkg-config --exists dtkwidget && echo "dtkwidget.pc found" || echo "dtkwidget.pc NOT found"
+          pkg-config --cflags dtkwidget
+          pkg-config --libs dtkwidget
+          /usr/lib/qt5/bin/qmake --version
+          which dh
+
+      - name: Clean
+        run: |
+          fakeroot debian/rules clean
+
+      - name: Build
+        run: |
+          fakeroot debian/rules build
+
+      - name: Build binary package
+        run: |
+          fakeroot debian/rules binary
 
       - name: Get version
         id: version
