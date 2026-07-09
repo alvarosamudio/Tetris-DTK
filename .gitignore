@@ -28,6 +28,7 @@ Tetris
 *.pro.user*
 translations/*.qm
 .qm/
+*.deb
 qmake_qmake_qm_files.qrc
 
 # Debug/Release directories
