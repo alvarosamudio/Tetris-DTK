@@ -24,6 +24,8 @@ private slots:
   void onStartClicked();
   void onMuteClicked();
   void updateScore(int score);
+  void updateLevel(int level);
+  void updateLines(int lines);
   void updateNextPiece(const Tetromino &piece);
   void onGameOver(int score);
 

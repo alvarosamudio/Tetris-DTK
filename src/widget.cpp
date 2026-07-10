@@ -28,6 +28,8 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
   ui->nextContainer->layout()->setAlignment(Qt::AlignCenter);
 
   connect(m_gameBoard, &GameBoard::scoreChanged, this, &Widget::updateScore);
+  connect(m_gameBoard, &GameBoard::levelChanged, this, &Widget::updateLevel);
+  connect(m_gameBoard, &GameBoard::linesChanged, this, &Widget::updateLines);
   connect(m_gameBoard, &GameBoard::nextPieceChanged, this,
           &Widget::updateNextPiece);
   connect(m_gameBoard, &GameBoard::gameOver, this, &Widget::onGameOver);
@@ -41,6 +43,14 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
 
   ui->highScoreLabel->setStyleSheet(
       "font-size: 11pt; font-family: 'Monospace'; font-weight: bold; color: #ffcc00;");
+
+  ui->levelLabel->setText(tr("LEVEL") + "\n01");
+  ui->levelLabel->setStyleSheet(
+      "font-size: 11pt; font-family: 'Monospace'; font-weight: bold; color: #00ccff;");
+
+  ui->linesLabel->setText(tr("LINES") + "\n000");
+  ui->linesLabel->setStyleSheet(
+      "font-size: 11pt; font-family: 'Monospace'; font-weight: bold; color: #00ff88;");
 
   loadHighScore();
 }
@@ -78,6 +88,16 @@ void Widget::onStartClicked() {
 void Widget::updateScore(int score) {
   QString scoreStr = QString("%1").arg(score, 6, 10, QChar('0'));
   ui->scoreLabel->setText(tr("SCORE") + "\n" + scoreStr);
+}
+
+void Widget::updateLevel(int level) {
+  QString levelStr = QString("%1").arg(level, 2, 10, QChar('0'));
+  ui->levelLabel->setText(tr("LEVEL") + "\n" + levelStr);
+}
+
+void Widget::updateLines(int lines) {
+  QString linesStr = QString("%1").arg(lines, 3, 10, QChar('0'));
+  ui->linesLabel->setText(tr("LINES") + "\n" + linesStr);
 }
 
 void Widget::updateNextPiece(const Tetromino &piece) {

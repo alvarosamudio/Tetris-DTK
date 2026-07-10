@@ -111,6 +111,38 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="levelLabel">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>LEVEL</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="linesLabel">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>LINES</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
