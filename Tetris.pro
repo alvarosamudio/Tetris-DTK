@@ -19,14 +19,16 @@ SOURCES += src/main.cpp\
     src/widget.cpp \
     src/tetrisgame.cpp \
     src/gameboard.cpp \
-    src/nextpiecewidget.cpp
+    src/nextpiecewidget.cpp \
+    src/soundmanager.cpp
 
 HEADERS  += src/mainwindow.h \
     src/widget.h \
     src/tetrisgame.h \
     src/tetriscolors.h \
     src/gameboard.h \
-    src/nextpiecewidget.h
+    src/nextpiecewidget.h \
+    src/soundmanager.h
 
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget

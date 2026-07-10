@@ -3,6 +3,7 @@
 
 #include "gameboard.h"
 #include "nextpiecewidget.h"
+#include "soundmanager.h"
 #include <QSettings>
 #include <QWidget>
 
@@ -36,6 +37,7 @@ private:
   Ui::Widget *ui;
   GameBoard *m_gameBoard;
   NextPieceWidget *m_nextPieceWidget;
+  SoundManager *m_soundManager;
   bool m_muted;
   int m_highScore;
 };

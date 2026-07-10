@@ -21,6 +21,9 @@ signals:
   void scoreChanged(int score);
   void levelChanged(int level);
   void linesChanged(int lines);
+  void linesCleared(int count);
+  void pieceDropped();
+  void pieceRotated();
   void nextPieceChanged(const Tetromino &piece);
   void gameOver(int score);
 

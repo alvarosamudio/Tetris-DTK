@@ -49,8 +49,10 @@ void GameBoard::gameStep() {
     emit scoreChanged(game.getScore());
   if (game.getLevel() != oldLevel)
     emit levelChanged(game.getLevel());
-  if (game.getTotalLinesCleared() != oldLines)
+  if (game.getTotalLinesCleared() != oldLines) {
     emit linesChanged(game.getTotalLinesCleared());
+    emit linesCleared(game.getTotalLinesCleared() - oldLines);
+  }
   if (game.getNextPiece().type != oldNextType)
     emit nextPieceChanged(game.getNextPiece());
 
@@ -170,14 +172,20 @@ void GameBoard::keyPressEvent(QKeyEvent *event) {
   case Qt::Key_Right:
     game.moveRight();
     break;
-  case Qt::Key_Up:
+  case Qt::Key_Up: {
+    int oldLines2 = game.getTotalLinesCleared();
     game.rotate();
+    if (game.getTotalLinesCleared() == oldLines2 &&
+        game.getScore() == oldScore)
+      emit pieceRotated();
     break;
+  }
   case Qt::Key_Down:
     game.softDrop();
     break;
   case Qt::Key_Space:
     game.hardDrop();
+    emit pieceDropped();
     break;
   case Qt::Key_P:
     if (game.isPaused())
@@ -194,8 +202,10 @@ void GameBoard::keyPressEvent(QKeyEvent *event) {
     emit scoreChanged(game.getScore());
   if (game.getLevel() != oldLevel)
     emit levelChanged(game.getLevel());
-  if (game.getTotalLinesCleared() != oldLines)
+  if (game.getTotalLinesCleared() != oldLines) {
     emit linesChanged(game.getTotalLinesCleared());
+    emit linesCleared(game.getTotalLinesCleared() - oldLines);
+  }
   if (game.getNextPiece().type != oldNext)
     emit nextPieceChanged(game.getNextPiece());
   if (game.isGameOver())

@@ -11,6 +11,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
 
   m_gameBoard = new GameBoard(this);
   m_nextPieceWidget = new NextPieceWidget(this);
+  m_soundManager = new SoundManager(this);
 
   // Main Game Container
   if (!ui->gameContainer->layout()) {
@@ -33,6 +34,13 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
   connect(m_gameBoard, &GameBoard::nextPieceChanged, this,
           &Widget::updateNextPiece);
   connect(m_gameBoard, &GameBoard::gameOver, this, &Widget::onGameOver);
+
+  // Sound effects
+  connect(m_gameBoard, &GameBoard::pieceRotated, m_soundManager, &SoundManager::playRotate);
+  connect(m_gameBoard, &GameBoard::pieceDropped, m_soundManager, &SoundManager::playDrop);
+  connect(m_gameBoard, &GameBoard::linesCleared, m_soundManager, &SoundManager::playLineClear);
+  connect(m_gameBoard, &GameBoard::gameOver, m_soundManager, [this](int) { m_soundManager->playGameOver(); });
+
   connect(ui->startBtn, &QPushButton::clicked, this, &Widget::onStartClicked);
   connect(ui->muteBtn, &QPushButton::clicked, this, &Widget::onMuteClicked);
 
@@ -107,5 +115,6 @@ void Widget::updateNextPiece(const Tetromino &piece) {
 void Widget::onMuteClicked() {
   m_muted = !m_muted;
   ui->muteBtn->setText(m_muted ? tr("Unmute") : tr("Mute"));
+  m_soundManager->setMuted(m_muted);
   emit musicToggled(m_muted);
 }
