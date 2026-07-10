@@ -1,4 +1,5 @@
 #include "nextpiecewidget.h"
+#include "tetriscolors.h"
 #include <QLinearGradient>
 #include <QPainter>
 
@@ -46,26 +47,5 @@ void NextPieceWidget::paintEvent(QPaintEvent *) {
                          blockRect.width() * 0.5, blockRect.height() * 0.25);
     painter.drawRoundedRect(highlightRect, highlightRect.height() / 2.0,
                             highlightRect.height() / 2.0);
-  }
-}
-
-QColor NextPieceWidget::getColorForType(TetrominoType type) {
-  switch (type) {
-  case TetrominoType::I:
-    return QColor(255, 80, 80);
-  case TetrominoType::J:
-    return QColor(80, 150, 255);
-  case TetrominoType::L:
-    return QColor(255, 150, 50);
-  case TetrominoType::O:
-    return QColor(255, 220, 50);
-  case TetrominoType::S:
-    return QColor(100, 220, 80);
-  case TetrominoType::T:
-    return QColor(180, 100, 255);
-  case TetrominoType::Z:
-    return QColor(255, 100, 100);
-  default:
-    return Qt::black;
   }
 }

@@ -33,7 +33,6 @@ private slots:
 
 private:
   void drawBlock(QPainter &painter, int x, int y, TetrominoType type);
-  QColor getColorForType(TetrominoType type);
 
   TetrisGame game;
   QTimer *timer;

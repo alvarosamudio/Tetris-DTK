@@ -15,8 +15,6 @@ protected:
   void paintEvent(QPaintEvent *event) override;
 
 private:
-  QColor getColorForType(TetrominoType type);
-
   Tetromino m_piece;
 };
 

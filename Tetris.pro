@@ -24,6 +24,7 @@ SOURCES += src/main.cpp\
 HEADERS  += src/mainwindow.h \
     src/widget.h \
     src/tetrisgame.h \
+    src/tetriscolors.h \
     src/gameboard.h \
     src/nextpiecewidget.h
 
