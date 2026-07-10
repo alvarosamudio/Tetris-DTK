@@ -16,6 +16,17 @@ struct Tetromino {
   void rotateClockwise();
 };
 
+class BagRandomizer {
+public:
+  BagRandomizer();
+  TetrominoType next();
+  void reset();
+
+private:
+  QVector<TetrominoType> bag;
+  void refill();
+};
+
 class TetrisGame {
 public:
   static const int Width = 10;
@@ -35,9 +46,12 @@ public:
   const Tetromino &getCurrentPiece() const { return currentPiece; }
   const Tetromino &getNextPiece() const { return nextPiece; }
   int getScore() const { return score; }
+  int getLevel() const { return level; }
+  int getTotalLinesCleared() const { return totalLinesCleared; }
   bool isGameOver() const { return gameState == GameState::GameOver; }
   bool isPaused() const { return gameState == GameState::Paused; }
   void setPaused(bool paused);
+  int getTickInterval() const;
 
 private:
   enum class GameState { Running, Paused, GameOver };
@@ -52,6 +66,9 @@ private:
   Tetromino nextPiece;
   GameState gameState;
   int score;
+  int level;
+  int totalLinesCleared;
+  BagRandomizer bag;
 };
 
 #endif // TETRISGAME_H

@@ -13,9 +13,11 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent), blockSize(35) {
 
 void GameBoard::startGame() {
   game.reset();
-  timer->start(500);
+  timer->start(game.getTickInterval());
   emit scoreChanged(game.getScore());
   emit nextPieceChanged(game.getNextPiece());
+  emit levelChanged(game.getLevel());
+  emit linesChanged(game.getTotalLinesCleared());
   update();
 }
 
@@ -27,12 +29,14 @@ void GameBoard::pauseGame() {
 
 void GameBoard::resumeGame() {
   game.setPaused(false);
-  timer->start(500);
+  timer->start(game.getTickInterval());
   update();
 }
 
 void GameBoard::gameStep() {
   int oldScore = game.getScore();
+  int oldLevel = game.getLevel();
+  int oldLines = game.getTotalLinesCleared();
   TetrominoType oldNextType = game.getNextPiece().type;
 
   if (!game.step()) {
@@ -40,12 +44,18 @@ void GameBoard::gameStep() {
     emit gameOver(game.getScore());
   }
 
-  if (game.getScore() != oldScore) {
+  if (game.getScore() != oldScore)
     emit scoreChanged(game.getScore());
-  }
-  if (game.getNextPiece().type != oldNextType) {
+  if (game.getLevel() != oldLevel)
+    emit levelChanged(game.getLevel());
+  if (game.getTotalLinesCleared() != oldLines)
+    emit linesChanged(game.getTotalLinesCleared());
+  if (game.getNextPiece().type != oldNextType)
     emit nextPieceChanged(game.getNextPiece());
-  }
+
+  // Update timer interval for current level
+  if (timer->isActive())
+    timer->setInterval(game.getTickInterval());
 
   update();
 }
@@ -169,6 +179,8 @@ QColor GameBoard::getColorForType(TetrominoType type) {
 
 void GameBoard::keyPressEvent(QKeyEvent *event) {
   int oldScore = game.getScore();
+  int oldLevel = game.getLevel();
+  int oldLines = game.getTotalLinesCleared();
   TetrominoType oldNext = game.getNextPiece().type;
 
   switch (event->key()) {
@@ -200,6 +212,10 @@ void GameBoard::keyPressEvent(QKeyEvent *event) {
 
   if (game.getScore() != oldScore)
     emit scoreChanged(game.getScore());
+  if (game.getLevel() != oldLevel)
+    emit levelChanged(game.getLevel());
+  if (game.getTotalLinesCleared() != oldLines)
+    emit linesChanged(game.getTotalLinesCleared());
   if (game.getNextPiece().type != oldNext)
     emit nextPieceChanged(game.getNextPiece());
   if (game.isGameOver())

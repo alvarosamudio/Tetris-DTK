@@ -19,6 +19,8 @@ public:
 
 signals:
   void scoreChanged(int score);
+  void levelChanged(int level);
+  void linesChanged(int lines);
   void nextPieceChanged(const Tetromino &piece);
   void gameOver(int score);
 

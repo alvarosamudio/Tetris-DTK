@@ -49,10 +49,30 @@ void Tetromino::rotateClockwise() {
 static const TetrominoType kAllTypes[] = {
     TetrominoType::I, TetrominoType::J, TetrominoType::L, TetrominoType::O,
     TetrominoType::S, TetrominoType::T, TetrominoType::Z};
-static constexpr int kNumTypes = sizeof(kAllTypes) / sizeof(kAllTypes[0]);
+static constexpr int kNumTypes = 7;
 
-static Tetromino randomPiece() {
-  return Tetromino::create(kAllTypes[QRandomGenerator::global()->bounded(kNumTypes)]);
+BagRandomizer::BagRandomizer() { refill(); }
+
+void BagRandomizer::refill() {
+  bag.clear();
+  for (int i = 0; i < kNumTypes; ++i)
+    bag.append(kAllTypes[i]);
+  // Fisher-Yates shuffle
+  for (int i = bag.size() - 1; i > 0; --i) {
+    int j = QRandomGenerator::global()->bounded(i + 1);
+    qSwap(bag[i], bag[j]);
+  }
+}
+
+TetrominoType BagRandomizer::next() {
+  if (bag.isEmpty())
+    refill();
+  return bag.takeLast();
+}
+
+void BagRandomizer::reset() {
+  bag.clear();
+  refill();
 }
 
 TetrisGame::TetrisGame() { reset(); }
@@ -63,15 +83,18 @@ void TetrisGame::reset() {
   for (int i = 0; i < Height; ++i)
     grid[i].fill(TetrominoType::None, Width);
   score = 0;
+  level = 1;
+  totalLinesCleared = 0;
   gameState = GameState::Running;
 
-  nextPiece = randomPiece();
+  bag.reset();
+  nextPiece = Tetromino::create(bag.next());
   spawnPiece();
 }
 
 void TetrisGame::spawnPiece() {
   currentPiece = nextPiece;
-  nextPiece = randomPiece();
+  nextPiece = Tetromino::create(bag.next());
 
   if (!isValidPosition(currentPiece, currentPiece.position)) {
     gameState = GameState::GameOver;
@@ -169,22 +192,23 @@ void TetrisGame::clearLines() {
       linesCleared++;
     }
   }
-  switch (linesCleared) {
-  case 1:
-    score += 100;
-    break;
-  case 2:
-    score += 300;
-    break;
-  case 3:
-    score += 500;
-    break;
-  case 4:
-    score += 800;
-    break;
-  default:
-    break;
+  if (linesCleared > 0) {
+    totalLinesCleared += linesCleared;
+    level = 1 + totalLinesCleared / 10;
+    switch (linesCleared) {
+    case 1: score += 100 * level; break;
+    case 2: score += 300 * level; break;
+    case 3: score += 500 * level; break;
+    case 4: score += 800 * level; break;
+    default: break;
+    }
   }
+}
+
+int TetrisGame::getTickInterval() const {
+  // Starts at 800ms, decreases by ~60ms per level, min 80ms
+  int interval = 800 - (level - 1) * 60;
+  return qMax(interval, 80);
 }
 
 void TetrisGame::setPaused(bool paused) {
