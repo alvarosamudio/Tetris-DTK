@@ -29,23 +29,23 @@ void NextPieceWidget::paintEvent(QPaintEvent *) {
 
   QColor color = getColorForType(m_piece.type);
   for (const QPoint &block : m_piece.blocks) {
-    QRectF blockRect(offsetX + block.x() * blockSize + 2,
-                     offsetY + block.y() * blockSize + 2, blockSize - 4,
-                     blockSize - 4);
+    QRectF blockRect(offsetX + block.x() * blockSize + 1,
+                     offsetY + block.y() * blockSize + 1, blockSize - 2,
+                     blockSize - 2);
 
     QLinearGradient gradient(blockRect.topLeft(), blockRect.bottomLeft());
     gradient.setColorAt(0, color.lighter(130));
-    gradient.setColorAt(1, color.darker(110));
+    gradient.setColorAt(1, color.darker(120));
 
+    painter.setPen(QPen(color.darker(140), 1));
     painter.setBrush(gradient);
-    painter.drawRoundedRect(blockRect, blockRect.width() / 2.0,
-                            blockRect.height() / 2.0);
+    painter.drawRoundedRect(blockRect, 4, 4);
 
-    painter.setBrush(QColor(255, 255, 255, 130));
-    QRectF highlightRect(blockRect.left() + blockRect.width() * 0.25,
-                         blockRect.top() + blockRect.height() * 0.15,
-                         blockRect.width() * 0.5, blockRect.height() * 0.25);
-    painter.drawRoundedRect(highlightRect, highlightRect.height() / 2.0,
-                            highlightRect.height() / 2.0);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255, 255, 255, 100));
+    QRectF highlightRect(blockRect.left() + 2,
+                         blockRect.top() + 1,
+                         blockRect.width() * 0.4, blockRect.height() * 0.25);
+    painter.drawRoundedRect(highlightRect, 2, 2);
   }
 }

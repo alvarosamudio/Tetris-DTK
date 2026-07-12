@@ -136,27 +136,26 @@ void GameBoard::paintEvent(QPaintEvent *) {
 
 void GameBoard::drawBlock(QPainter &painter, int x, int y, TetrominoType type) {
   QColor color = getColorForType(type);
-  QRectF blockRect(x * blockSize + 3, y * blockSize + 3, blockSize - 6,
-                   blockSize - 6);
+  QRectF blockRect(x * blockSize + 2, y * blockSize + 2, blockSize - 4,
+                   blockSize - 4);
 
   QLinearGradient gradient(blockRect.topLeft(), blockRect.bottomLeft());
-  gradient.setColorAt(0, color.lighter(140));
-  gradient.setColorAt(1, color.darker(110));
+  gradient.setColorAt(0, color.lighter(130));
+  gradient.setColorAt(1, color.darker(120));
 
-  painter.setPen(Qt::NoPen);
+  painter.setPen(QPen(color.darker(140), 1));
   painter.setBrush(gradient);
 
-  // Pill shape
-  painter.drawRoundedRect(blockRect, blockRect.width() / 2.0,
-                          blockRect.height() / 2.0);
+  // Square with rounded corners
+  painter.drawRoundedRect(blockRect, 5, 5);
 
-  // Concept Highlight
-  painter.setBrush(QColor(255, 255, 255, 130));
-  QRectF highlightRect(blockRect.left() + blockRect.width() * 0.25,
-                       blockRect.top() + blockRect.height() * 0.15,
-                       blockRect.width() * 0.5, blockRect.height() * 0.25);
-  painter.drawRoundedRect(highlightRect, highlightRect.height() / 2.0,
-                          highlightRect.height() / 2.0);
+  // Top-left highlight
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(QColor(255, 255, 255, 100));
+  QRectF highlightRect(blockRect.left() + 3,
+                       blockRect.top() + 2,
+                       blockRect.width() * 0.4, blockRect.height() * 0.25);
+  painter.drawRoundedRect(highlightRect, 2, 2);
 }
 
 void GameBoard::keyPressEvent(QKeyEvent *event) {
