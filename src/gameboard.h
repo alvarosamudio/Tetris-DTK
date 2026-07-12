@@ -4,6 +4,7 @@
 #include "tetrisgame.h"
 #include <QKeyEvent>
 #include <QPainter>
+#include <QResizeEvent>
 #include <QTimer>
 #include <QWidget>
 
@@ -30,6 +31,7 @@ signals:
 protected:
   void paintEvent(QPaintEvent *event) override;
   void keyPressEvent(QKeyEvent *event) override;
+  void resizeEvent(QResizeEvent *event) override;
 
 private slots:
   void gameStep();

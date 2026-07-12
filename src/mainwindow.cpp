@@ -10,9 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     w = new Widget;
 
-    resize(w->size());
-    setFixedSize(w->size());
-    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    resize(520, 780);
+    setMinimumSize(380, 500);
 
     setCentralWidget(w);
     centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);

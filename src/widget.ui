@@ -32,14 +32,14 @@
    <item>
     <layout class="QHBoxLayout" name="gameLayout">
      <item>
-       <widget class="QWidget" name="gameContainer" native="true">
-        <property name="minimumSize">
-         <size>
-          <width>350</width>
-          <height>600</height>
-         </size>
-        </property>
-       </widget>
+        <widget class="QWidget" name="gameContainer" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
      </item>
      <item>
       <layout class="QVBoxLayout" name="sideLayout">
@@ -57,9 +57,15 @@
         <widget class="QWidget" name="nextContainer" native="true">
          <property name="minimumSize">
           <size>
-           <width>110</width>
-           <height>110</height>
+           <width>90</width>
+           <height>90</height>
           </size>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
         </widget>
        </item>
@@ -80,13 +86,13 @@
         </spacer>
        </item>
        <item>
-         <widget class="QLabel" name="scoreLabel">
-          <property name="minimumSize">
-           <size>
-            <width>110</width>
-            <height>50</height>
-           </size>
-          </property>
+          <widget class="QLabel" name="scoreLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>50</height>
+            </size>
+           </property>
           <property name="text">
            <string>SCORE</string>
           </property>
@@ -96,13 +102,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="highScoreLabel">
-          <property name="minimumSize">
-           <size>
-            <width>110</width>
-            <height>40</height>
-           </size>
-          </property>
+          <widget class="QLabel" name="highScoreLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>40</height>
+            </size>
+           </property>
           <property name="text">
            <string>HI-SCORE</string>
           </property>
@@ -112,13 +118,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="levelLabel">
-          <property name="minimumSize">
-           <size>
-            <width>110</width>
-            <height>40</height>
-           </size>
-          </property>
+          <widget class="QLabel" name="levelLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>40</height>
+            </size>
+           </property>
           <property name="text">
            <string>LEVEL</string>
           </property>
@@ -128,13 +134,13 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="linesLabel">
-          <property name="minimumSize">
-           <size>
-            <width>110</width>
-            <height>40</height>
-           </size>
-          </property>
+          <widget class="QLabel" name="linesLabel">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>40</height>
+            </size>
+           </property>
           <property name="text">
            <string>LINES</string>
           </property>

@@ -4,7 +4,8 @@
 #include <QPainter>
 
 NextPieceWidget::NextPieceWidget(QWidget *parent) : QWidget(parent) {
-  setFixedSize(80, 120);
+  setMinimumSize(80, 80);
+  setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 }
 
 void NextPieceWidget::setNextPiece(const Tetromino &piece) {
@@ -23,7 +24,8 @@ void NextPieceWidget::paintEvent(QPaintEvent *) {
   if (m_piece.type == TetrominoType::None)
     return;
 
-  int blockSize = 18;
+  int blockSize = qMin(width() / 4, height() / 3);
+  if (blockSize < 6) blockSize = 6;
   int offsetX = (width() - 4 * blockSize) / 2;
   int offsetY = (height() - 2 * blockSize) / 2;
 

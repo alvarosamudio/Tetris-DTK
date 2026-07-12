@@ -3,13 +3,27 @@
 #include <QKeyEvent>
 #include <QLinearGradient>
 #include <QPainter>
+#include <QResizeEvent>
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent), blockSize(35) {
   setFocusPolicy(Qt::StrongFocus);
   timer = new QTimer(this);
   connect(timer, &QTimer::timeout, this, &GameBoard::gameStep);
-  setFixedSize(TetrisGame::Width * blockSize,
-               (TetrisGame::Height - 2) * blockSize);
+
+  int rows = TetrisGame::Height - 2;
+  int minW = TetrisGame::Width * 20;
+  int minH = rows * 20;
+  setMinimumSize(minW, minH);
+}
+
+void GameBoard::resizeEvent(QResizeEvent *event) {
+  QWidget::resizeEvent(event);
+  int rows = TetrisGame::Height - 2;
+  int bw = width() / TetrisGame::Width;
+  int bh = height() / rows;
+  blockSize = qMin(bw, bh);
+  if (blockSize < 10) blockSize = 10;
+  update();
 }
 
 void GameBoard::startGame() {
