@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT += core widgets gui multimedia
+QT += core gui widgets multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,10 +31,9 @@ HEADERS  += src/mainwindow.h \
     src/soundmanager.h
 
 CONFIG += link_pkgconfig
-PKGCONFIG += dtkwidget
+PKGCONFIG += dtk6widget
 
-CONFIG += c++11 lrelease embed_translations
-QM_FILES_RESOURCE_PREFIX = /translations
+CONFIG += c++17
 
 FORMS += \
     src/widget.ui

@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <DMainWindow>
+#include <QAudioOutput>
 #include <QMediaPlayer>
-#include <QMediaPlaylist>
 #include "widget.h"
 
 DWIDGET_USE_NAMESPACE
@@ -13,13 +13,13 @@ class MainWindow : public DMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
     Widget *w;
     QMediaPlayer *m_music;
-    QMediaPlaylist *m_playlist;
+    QAudioOutput *m_audioOutput;
 };
 
 #endif // MAINWINDOW_H

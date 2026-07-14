@@ -10,22 +10,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
     w = new Widget;
 
-    resize(520, 780);
-    setMinimumSize(380, 500);
+    resize(410, 630);
+    setMinimumSize(410, 630);
+    setMaximumSize(410, 630);
 
     setCentralWidget(w);
     centralWidget()->layout()->setContentsMargins(0, 0, 0, 0);
 
-    m_playlist = new QMediaPlaylist(this);
-    m_playlist->addMedia(QUrl("qrc:/tetris_theme.wav"));
-    m_playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    m_audioOutput = new QAudioOutput(this);
+    m_audioOutput->setVolume(0.5f);
 
     m_music = new QMediaPlayer(this);
-    m_music->setPlaylist(m_playlist);
+    m_music->setAudioOutput(m_audioOutput);
+    m_music->setSource(QUrl(QStringLiteral("qrc:/tetris_theme.wav")));
+    m_music->setLoops(QMediaPlayer::Infinite);
     m_music->play();
 
     connect(w, &Widget::musicToggled, this, [this](bool muted) {
-        m_music->setMuted(muted);
+        m_audioOutput->setMuted(muted);
     });
 }
 
