@@ -43,3 +43,6 @@ build*/
 .vscode/
 .idea/
 *.swp
+
+# test linyapps
+w/

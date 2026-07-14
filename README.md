@@ -1,6 +1,6 @@
 # Tetris-DTK 🎮
 
-![Qt Badge](https://img.shields.io/badge/Qt-5.15+-41CD52?logo=qt&logoColor=white)
+![Qt Badge](https://img.shields.io/badge/Qt-6-41CD52?logo=qt&logoColor=white)
 ![Deepin Badge](https://img.shields.io/badge/Deepin-DTK-0078D7?logo=linux&logoColor=white)
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
@@ -18,12 +18,13 @@ Este proyecto ha sido reconstruido desde cero para abandonar el antiguo motor we
 
 ## 🛠️ Requisitos de Compilación
 
-Para compilar este proyecto en Deepin o cualquier sistema con soporte DTK, necesitarás:
+Para compilar este proyecto en Deepin o cualquier sistema con soporte DTK6, necesitarás:
 
-- `qtbase5-dev`
-- `dtkwidget-dev`
-- `qt5-default` (o equivalente)
+- `qt6-base-dev`
+- `libdtk6widget-dev`
+- `qt6-multimedia-dev`
 - `pkg-config`
+- `g++`
 
 ## 🚀 Instalación y Compilación
 
@@ -34,21 +35,19 @@ Para compilar este proyecto en Deepin o cualquier sistema con soporte DTK, neces
    cd Tetris-DTK
    ```
 
-2. **Genera el Makefile con qmake:**
+2. **Compila el proyecto:**
 
    ```bash
-   qmake
+   make clean
+   /usr/lib/qt6/bin/qmake "QMAKE_CC=/usr/bin/gcc" "QMAKE_CXX=/usr/bin/g++"
+   make -j$(nproc) CC=/usr/bin/gcc CXX=/usr/bin/g++
    ```
 
-3. **Compila el proyecto:**
+   > **Nota:** Se usa `/usr/bin/g++` explícitamente para evitar conflictos con instalaciones locales de GCC que puedan tener rutas incorrectas.
 
+3. **Ejecuta el juego:**
    ```bash
-   make
-   ```
-
-4. **Ejecuta el juego:**
-   ```bash
-   ./Tetris
+   ./tetris-deepin
    ```
 
 ## 🎮 Controles
@@ -61,6 +60,22 @@ Para compilar este proyecto en Deepin o cualquier sistema con soporte DTK, neces
 | `Espacio` | Caída instantánea (Hard Drop)        |
 | `P`       | Pausar / Reanudar el juego           |
 
+## 📦 Binario
+
+El binario compilado se genera en la raíz del proyecto:
+
+```
+tetris-deepin
+```
+
+Para instalarlo globalmente:
+
+```bash
+sudo make install INSTALLROOT=/
+```
+
+Esto copiará el binario a `/usr/local/bin/` y los recursos (icono, archivo `.desktop`) a sus ubicaciones correspondientes.
+
 ## 🤝 Créditos
 
 - Desarrollo original impulsado por la comunidad de **Deepin en Español**.
@@ -72,4 +87,4 @@ _Hecho con ❤️ para la comunidad de Deepin._
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia **GNU General Public License v3.0**. Consulta el archivo [LICENSE](file:///Users/ghost/Documents/Proyectos/GitHub/Tetris-DTK/LICENSE) para más detalles.
+Este proyecto está bajo la licencia **GNU General Public License v3.0**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
