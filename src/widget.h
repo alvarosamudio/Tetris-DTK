@@ -23,6 +23,7 @@ signals:
 
 private slots:
   void onStartClicked();
+  void onPauseClicked();
   void onMuteClicked();
   void updateScore(int score);
   void updateLevel(int level);

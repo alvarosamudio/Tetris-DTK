@@ -32,14 +32,14 @@
    <item>
     <layout class="QHBoxLayout" name="gameLayout">
      <item>
-        <widget class="QWidget" name="gameContainer" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>1</horstretch>
-           <verstretch>1</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+       <widget class="QWidget" name="gameContainer" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
      </item>
      <item>
       <layout class="QVBoxLayout" name="sideLayout">
@@ -61,8 +61,14 @@
            <height>90</height>
           </size>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>90</height>
+          </size>
+         </property>
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -80,19 +86,19 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>20</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-          <widget class="QLabel" name="scoreLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>50</height>
-            </size>
-           </property>
+         <widget class="QLabel" name="scoreLabel">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="text">
            <string>SCORE</string>
           </property>
@@ -100,15 +106,15 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-        </item>
-        <item>
-          <widget class="QLabel" name="highScoreLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>40</height>
-            </size>
-           </property>
+       </item>
+       <item>
+         <widget class="QLabel" name="highScoreLabel">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>HI-SCORE</string>
           </property>
@@ -116,15 +122,15 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-        </item>
-        <item>
-          <widget class="QLabel" name="levelLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>40</height>
-            </size>
-           </property>
+       </item>
+       <item>
+         <widget class="QLabel" name="levelLabel">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>LEVEL</string>
           </property>
@@ -132,15 +138,15 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-        </item>
-        <item>
-          <widget class="QLabel" name="linesLabel">
-           <property name="minimumSize">
-            <size>
-             <width>90</width>
-             <height>40</height>
-            </size>
-           </property>
+       </item>
+       <item>
+         <widget class="QLabel" name="linesLabel">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
           <property name="text">
            <string>LINES</string>
           </property>
@@ -148,7 +154,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-        </item>
+       </item>
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
@@ -170,13 +176,20 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pauseBtn">
+          <property name="text">
+           <string>Pause</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="muteBtn">
           <property name="text">
            <string>Mute</string>
           </property>
          </widget>
         </item>
-       </layout>
+      </layout>
      </item>
     </layout>
    </item>

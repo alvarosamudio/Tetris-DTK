@@ -2,12 +2,20 @@
 #include "ui_widget.h"
 #include <QString>
 #include <QVBoxLayout>
+#include <QLayoutItem>
 
 Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(false), m_highScore(0) {
   ui->setupUi(this);
 
   // Set dark theme style for the whole window
-  setStyleSheet("background-color: #1e1e1e; color: white;");
+  setStyleSheet(
+    "QWidget { background-color: #1e1e1e; color: white; }"
+    "QLabel { background-color: transparent; color: white; }"
+    "QPushButton { background-color: #333333; color: white; border: 1px solid #555555; border-radius: 4px; padding: 5px; }"
+    "QPushButton:hover { background-color: #444444; }"
+    "#nextContainer { background-color: #232323; border-radius: 10px; }"
+    "QPushButton { min-width: 90px; max-width: 90px; }"
+  );
 
   m_gameBoard = new GameBoard(this);
   m_nextPieceWidget = new NextPieceWidget(this);
@@ -20,13 +28,20 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
   ui->gameContainer->layout()->addWidget(m_gameBoard);
   ui->gameContainer->layout()->setContentsMargins(0, 0, 0, 0);
 
-  // Concept: Place NextPieceWidget in a specific area
+  // Place NextPieceWidget
   if (!ui->nextContainer->layout()) {
     ui->nextContainer->setLayout(new QVBoxLayout());
   }
   ui->nextContainer->layout()->addWidget(m_nextPieceWidget);
   ui->nextContainer->layout()->setContentsMargins(5, 5, 5, 5);
   ui->nextContainer->layout()->setAlignment(Qt::AlignCenter);
+
+  // Center all items in the side panel
+  for (int i = 0; i < ui->sideLayout->count(); ++i) {
+    if (auto *item = ui->sideLayout->itemAt(i)) {
+      item->setAlignment(Qt::AlignHCenter);
+    }
+  }
 
   connect(m_gameBoard, &GameBoard::scoreChanged, this, &Widget::updateScore);
   connect(m_gameBoard, &GameBoard::levelChanged, this, &Widget::updateLevel);
@@ -42,7 +57,11 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget), m_muted(f
   connect(m_gameBoard, &GameBoard::gameOver, m_soundManager, [this](int) { m_soundManager->playGameOver(); });
 
   connect(ui->startBtn, &QPushButton::clicked, this, &Widget::onStartClicked);
+  connect(ui->pauseBtn, &QPushButton::clicked, this, &Widget::onPauseClicked);
   connect(ui->muteBtn, &QPushButton::clicked, this, &Widget::onMuteClicked);
+
+  // Pause button hidden until game starts
+  ui->pauseBtn->hide();
 
   // Custom styling for labels according to concept
   ui->scoreLabel->setText(tr("SCORE") + "\n000000");
@@ -91,6 +110,8 @@ void Widget::onStartClicked() {
   m_gameBoard->startGame();
   m_gameBoard->setFocus();
   ui->startBtn->setText(tr("RESTART"));
+  ui->pauseBtn->show();
+  ui->pauseBtn->setText(tr("Pause"));
 }
 
 void Widget::updateScore(int score) {
@@ -110,6 +131,16 @@ void Widget::updateLines(int lines) {
 
 void Widget::updateNextPiece(const Tetromino &piece) {
   m_nextPieceWidget->setNextPiece(piece);
+}
+
+void Widget::onPauseClicked() {
+  if (m_gameBoard->getGame().isPaused()) {
+    m_gameBoard->resumeGame();
+    ui->pauseBtn->setText(tr("Pause"));
+  } else {
+    m_gameBoard->pauseGame();
+    ui->pauseBtn->setText(tr("Resume"));
+  }
 }
 
 void Widget::onMuteClicked() {

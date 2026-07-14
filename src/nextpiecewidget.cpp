@@ -17,7 +17,7 @@ void NextPieceWidget::paintEvent(QPaintEvent *) {
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
 
-  painter.setBrush(QColor(35, 35, 35));
+  painter.setBrush(QColor(30, 30, 30));
   painter.setPen(Qt::NoPen);
   painter.drawRoundedRect(rect(), 20, 20);
 
