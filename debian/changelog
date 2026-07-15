@@ -1,6 +1,18 @@
+tetris-deepin (0.2-1) unstable; urgency=medium
+
+  * Migrate to Qt6/DTK6.
+  * Generate 8-bit music and sound effects programmatically.
+  * Add raccoon logo to about dialog.
+  * Start music on game start.
+  * Add missing translations: LEVEL, LINES, Pause, Resume.
+  * Update GitHub Actions for Qt6/DTK6 (Ubuntu 24.04 + Deepin crimson repo).
+  * Update debian packaging for Qt6/DTK6.
+
+ -- Deepin en Español <developers@deepinenespanol.org>  Tue, 14 Jul 2026 22:30:00 +0000
+
 tetris-deepin (0.1-1) unstable; urgency=medium
 
   * Initial release.
-  * Tetris clásico con Qt/DTK, música, i18n, puntaje alto persistente.
+  * Tetris clásico con Qt5/DTK, música, i18n, puntaje alto persistente.
 
  -- Deepin en Español <developers@deepinenespanol.org>  Wed, 08 Jul 2026 18:00:00 +0000
