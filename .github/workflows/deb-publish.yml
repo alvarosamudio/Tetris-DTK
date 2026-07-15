@@ -6,88 +6,48 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Install Qt6 and system deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            build-essential \
-            debhelper \
-            qt6-base-dev \
-            qt6-multimedia-dev \
-            fakeroot \
-            dirmngr \
-            gnupg
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
 
-      - name: Add Deepin repository
+      - name: Build Docker image and package .deb
         run: |
-          sudo mkdir -p /etc/apt/keyrings
-          curl -fsSL https://community-packages.deepin.com/deepin/beige/pool/main/d/deepin-keyring/deepin-keyring_2025.08.12_all.deb -o /tmp/deepin-keyring.deb
-          (cd /tmp && ar x deepin-keyring.deb)
-          sudo tar xf /tmp/data.tar.* -C /
-          sudo cp /usr/share/keyrings/deepin-archive-keyring.gpg /etc/apt/keyrings/deepin.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/deepin.gpg] https://community-packages.deepin.com/beige/ crimson main" \
-            | sudo tee /etc/apt/sources.list.d/deepin-main.list
-          echo "deb [signed-by=/etc/apt/keyrings/deepin.gpg] https://community-packages.deepin.com/beige/ crimson community" \
-            | sudo tee /etc/apt/sources.list.d/deepin-community.list
-          sudo apt-get update
+          docker build -t tetris-builder -f .github/workflows/Dockerfile .
 
-      - name: Install DTK6
+      - name: Extract .deb from Docker image
         run: |
-          sudo apt-get install -y libdtk6widget-dev
+          docker create --name extractor tetris-builder
+          mkdir -p dist
+          docker cp extractor:/output/. ./dist/
+          docker rm extractor
 
-      - name: Debug environment
+      - name: Find .deb file path
+        id: deb-info
         run: |
-          pkg-config --exists dtk6widget && echo "dtk6widget.pc found" || echo "dtk6widget.pc NOT found"
-          pkg-config --cflags dtk6widget
-          pkg-config --libs dtk6widget
-          /usr/lib/qt6/bin/qmake --version
-          which dh
-
-      - name: Clean
-        run: |
-          fakeroot debian/rules clean
-
-      - name: Build
-        run: |
-          fakeroot debian/rules build
-
-      - name: Build binary package
-        run: |
-          fakeroot debian/rules binary
-
-      - name: Get version
-        id: version
-        run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "tag=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-          else
-            echo "tag=$(dpkg-parsechangelog -S Version)" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Find .deb
-        id: deb
-        run: |
-          deb_file=$(ls ../*.deb | head -1)
+          deb_file=$(ls dist/*.deb | head -n 1)
           echo "path=$deb_file" >> $GITHUB_OUTPUT
           echo "name=$(basename $deb_file)" >> $GITHUB_OUTPUT
+          echo "Found .deb file: $deb_file"
 
       - name: Upload .deb as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.deb.outputs.name }}
-          path: ${{ steps.deb.outputs.path }}
+          name: ${{ steps.deb-info.outputs.name }}
+          path: ${{ steps.deb-info.outputs.path }}
 
       - name: Upload to Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: ${{ steps.deb.outputs.path }}
+          files: ${{ steps.deb-info.outputs.path }}
           generate_release_notes: true
