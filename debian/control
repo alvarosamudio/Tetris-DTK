@@ -2,19 +2,17 @@ Source: tetris-deepin
 Section: games
 Priority: optional
 Maintainer: Deepin en Español <developers@deepinenespanol.org>
-Build-Depends: debhelper-compat (= 12),
-               qt5-qmake,
-               qtbase5-dev,
-               qtmultimedia5-dev,
-               libdtkwidget-dev
-Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-multimedia-dev,
+               libdtk6widget-dev
+Standards-Version: 4.6.2
 Homepage: https://deepinenespanol.org
 
 Package: tetris-deepin
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
-         qt5-image-formats-plugins
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Classic Tetris game for Deepin desktop
- A modern Tetris implementation built with Qt and DTK,
- featuring pill-shaped blocks, music, high score tracking,
+ A modern Tetris implementation built with Qt6 and DTK6,
+ featuring pill-shaped blocks, 8-bit music, high score tracking,
  and full internationalization support.
