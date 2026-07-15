@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
     appTranslator.load(QLocale(), QLatin1String("tetris"), QLatin1String("_"),
                        QLatin1String(":/translations/"));
     a.installTranslator(&appTranslator);
-    a.setProductIcon(QIcon::fromTheme("applications-games"));
-    a.setWindowIcon(QIcon::fromTheme("applications-games"));
+    a.setProductIcon(QIcon(":/icons/tetris-deepin.svg"));
+    a.setWindowIcon(QIcon(":/icons/tetris-deepin.svg"));
     a.setProductName(QApplication::translate("main", "Tetris"));
     a.setApplicationName("Tetris");
 
@@ -27,8 +27,9 @@ int main(int argc, char *argv[])
     a.setAboutDialog(&dialog);
     dialog.setWindowTitle("Tetris");
     dialog.setProductName("<span>Tetris</span>");
-    dialog.setProductIcon(QIcon::fromTheme("applications-games"));
+    dialog.setProductIcon(QIcon(":/icons/tetris-deepin.svg"));
     dialog.setDescription(
+        "<div style='text-align:center;'><img src=':/icons/Logo-Racoon.png' width='128'/></div>"
         "<span style=' font-size:8pt; font-weight:600;'>Deepin en Español </span>"
         "<a href='https://deepinenespanol.org'>https://deepinenespanol.org</a><br/>"
         "<span style=' font-size:8pt; font-weight:600;'>Deepin Latin Code - developers</span>");
