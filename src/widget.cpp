@@ -112,6 +112,8 @@ void Widget::onStartClicked() {
   ui->startBtn->setText(tr("RESTART"));
   ui->pauseBtn->show();
   ui->pauseBtn->setText(tr("Pause"));
+  if (!m_muted)
+    m_soundManager->startMusic();
 }
 
 void Widget::updateScore(int score) {

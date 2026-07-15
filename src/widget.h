@@ -17,6 +17,7 @@ class Widget : public QWidget {
 public:
   explicit Widget(QWidget *parent = 0);
   ~Widget();
+  SoundManager *soundManager() const { return m_soundManager; }
 
 signals:
   void musicToggled(bool muted);
