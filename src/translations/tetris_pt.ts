@@ -42,6 +42,22 @@
         <source>Unmute</source>
         <translation>Ativar som</translation>
     </message>
+    <message>
+        <source>LEVEL</source>
+        <translation>NÍVEL</translation>
+    </message>
+    <message>
+        <source>LINES</source>
+        <translation>LINHAS</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Pausar</translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation>Continuar</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

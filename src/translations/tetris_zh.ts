@@ -42,6 +42,22 @@
         <source>Unmute</source>
         <translation>取消静音</translation>
     </message>
+    <message>
+        <source>LEVEL</source>
+        <translation>等级</translation>
+    </message>
+    <message>
+        <source>LINES</source>
+        <translation>行数</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>暂停</translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation>继续</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

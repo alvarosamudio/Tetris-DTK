@@ -42,6 +42,22 @@
         <source>Unmute</source>
         <translation>Stumm aufheben</translation>
     </message>
+    <message>
+        <source>LEVEL</source>
+        <translation>STUFE</translation>
+    </message>
+    <message>
+        <source>LINES</source>
+        <translation>ZEILEN</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Pause</translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation>Fortsetzen</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

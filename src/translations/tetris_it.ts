@@ -42,6 +42,22 @@
         <source>Unmute</source>
         <translation>Attiva audio</translation>
     </message>
+    <message>
+        <source>LEVEL</source>
+        <translation>LIVELLO</translation>
+    </message>
+    <message>
+        <source>LINES</source>
+        <translation>RIGHE</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Pausa</translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation>Riprendi</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

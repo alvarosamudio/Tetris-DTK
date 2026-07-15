@@ -42,6 +42,22 @@
         <source>Unmute</source>
         <translation>Вкл. звук</translation>
     </message>
+    <message>
+        <source>LEVEL</source>
+        <translation>УРОВЕНЬ</translation>
+    </message>
+    <message>
+        <source>LINES</source>
+        <translation>ЛИНИИ</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Пауза</translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation>Продолжить</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
