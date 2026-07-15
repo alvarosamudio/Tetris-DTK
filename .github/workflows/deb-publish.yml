@@ -8,31 +8,47 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install Qt6 and system deps
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             build-essential \
             debhelper \
-            qt5-qmake \
-            qtbase5-dev \
-            qtmultimedia5-dev \
-            libdtkwidget-dev \
-            libqt5x11extras5-dev \
-            fakeroot
+            qt6-base-dev \
+            qt6-multimedia-dev \
+            fakeroot \
+            dirmngr \
+            gnupg
+
+      - name: Add Deepin repository
+        run: |
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://community-packages.deepin.com/deepin/beige/pool/main/d/deepin-keyring/deepin-keyring_2025.08.12_all.deb -o /tmp/deepin-keyring.deb
+          (cd /tmp && ar x deepin-keyring.deb)
+          sudo tar xf /tmp/data.tar.* -C /
+          sudo cp /usr/share/keyrings/deepin-archive-keyring.gpg /etc/apt/keyrings/deepin.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/deepin.gpg] https://community-packages.deepin.com/beige/ crimson main" \
+            | sudo tee /etc/apt/sources.list.d/deepin-main.list
+          echo "deb [signed-by=/etc/apt/keyrings/deepin.gpg] https://community-packages.deepin.com/beige/ crimson community" \
+            | sudo tee /etc/apt/sources.list.d/deepin-community.list
+          sudo apt-get update
+
+      - name: Install DTK6
+        run: |
+          sudo apt-get install -y libdtk6widget-dev
 
       - name: Debug environment
         run: |
-          pkg-config --exists dtkwidget && echo "dtkwidget.pc found" || echo "dtkwidget.pc NOT found"
-          pkg-config --cflags dtkwidget
-          pkg-config --libs dtkwidget
-          /usr/lib/qt5/bin/qmake --version
+          pkg-config --exists dtk6widget && echo "dtk6widget.pc found" || echo "dtk6widget.pc NOT found"
+          pkg-config --cflags dtk6widget
+          pkg-config --libs dtk6widget
+          /usr/lib/qt6/bin/qmake --version
           which dh
 
       - name: Clean
