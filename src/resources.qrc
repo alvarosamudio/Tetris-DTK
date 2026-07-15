@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>tetris_theme.wav</file>
+        <file>icons/tetris-deepin.svg</file>
+        <file>icons/Logo-Racoon.png</file>
     </qresource>
 </RCC>
