@@ -1,4 +1,5 @@
-FROM linuxdeepin/deepin:crimson
+ARG BASE_IMAGE=linuxdeepin/deepin:crimson
+FROM ${BASE_IMAGE}
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
